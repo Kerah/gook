@@ -50,6 +50,7 @@ func (spl *spliter) Process() (result int, err error) {
 		}
 	}
 	if chunk.Len() > 0 {
+		sort.Sort(chunk)
 		spl.save(chunk)
 	}
 	result = spl.total
