@@ -38,8 +38,10 @@ func main() {
 	defer out.Close()
 
 	delim := []byte("\n")
-	for i:= 0; i<attempts; i++ {
-		_, err := out.Write(gen.Generate())
+	total := 0
+	for total < attempts {
+		gen := gen.Generate()
+		_, err := out.Write(gen)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -47,6 +49,7 @@ func main() {
 		if _, err = out.Write(delim); err != nil {
 			log.Fatal(err)
 		}
+		total += len(gen)
 	}
 	out.Sync()
 }

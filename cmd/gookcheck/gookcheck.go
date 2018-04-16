@@ -25,9 +25,12 @@ func main() {
 	scanner := bufio.NewScanner(fh)
 	var prev string
 	for scanner.Scan() {
-		if prev > scanner.Text() {
-			log.Fatalf("unsorted file")
+		current := scanner.Text()
+		if prev >  current {
+			log.Fatalf("unsorted file: '%s' >  '%s'", prev, current)
 		}
+		prev = current
+
 	}
 	fmt.Println("All ok. File is sorted")
 }
